@@ -5,7 +5,7 @@ import moment from 'moment';
 const TerminationDateInput = (props) => {
   const [date, setDate] = useState(moment(new Date(props.value)));
   const handleOnChange = (value) => {
-    props.onChange(value.format('YYYY-MM'));
+    value && props.onChange(value.format('YYYY-MM'));
     setDate(value)
   }
 
