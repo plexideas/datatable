@@ -27,3 +27,7 @@ thead[class*="ant-table-thead"] th{
   font-size: 12px;
   padding: 2px 6px;
 }
+
+.table-striped-rows .ant-table-column-sorters {
+  padding: 4px 6px;
+}
