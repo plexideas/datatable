@@ -1,14 +1,15 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
-import { COLUMNS, TEST_DATA_URL } from './config';
+import { Table, Spin } from 'antd';
+import { connect } from 'react-redux';
+import { actionFetchData } from '../../actions/dataActions';
+// import { COLUMNS } from './config';
 
 import './DataTable.css';
+import { actionFetchColumnsInfo } from '../../actions/columnsInfoActions';
 
-const DataTable = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+const DataTable = (props) => {
+
+  const { columns, data, error, loadingData, loadingColumns, fetchData, fetchColumnInfo } = props;
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const rowSelection = {
@@ -19,32 +20,49 @@ const DataTable = () => {
   };
 
   useEffect(() => {
-    axios.get(TEST_DATA_URL)
-      .then((result) => {
-        const { items } = result.data;
-        if (items) setData(items);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError('Failed fetching data! Please, try refresh page a little later');
-        setLoading(false);
-      });
-  }, []);
+    fetchColumnInfo();
+    fetchData();
+  }, [fetchData, fetchColumnInfo]);
 
   return (
     <div>
-      <Table
-        className="table-striped-rows"
-        columns={COLUMNS}
-        dataSource={data}
-        loading={loading}
-        rowSelection={rowSelection}
-        rowKey="RN"
-      />
+      {
+        loadingColumns 
+        ? <Spin />
+        : <Table
+            className="table-striped-rows"
+            columns={columns}
+            dataSource={data}
+            loading={loadingData}
+            rowSelection={rowSelection}
+            rowKey="RN"
+          />
+      }
       { error && <div>{error}</div> }
     </div>
   )
 }
 
-export default DataTable
+const mapStateToProps = (state) => {
+  return {
+    data: state.data.data,
+    loadingData: state.data.loading,
+    error: state.data.error,
+    columns: state.columnsInfo.columns,
+    loadingColumns: state.columnsInfo.loading,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: () => {
+      dispatch(actionFetchData());
+    },
+    fetchColumnInfo: () => {
+      dispatch(actionFetchColumnsInfo());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataTable)
 
