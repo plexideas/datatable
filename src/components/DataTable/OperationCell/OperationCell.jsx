@@ -9,6 +9,9 @@ const OperationCell = (props) => {
   const editable = record.RN === editingKey;
 
   const edit = (record) => {
+    form.setFieldsValue({
+      ...record,
+    });
     setEditingKey(record.RN);
   };
 
