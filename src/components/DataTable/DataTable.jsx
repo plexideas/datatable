@@ -6,11 +6,18 @@ import './DataTable.css';
 
 const TEST_DATA_URL = 'https://run.mocky.io/v3/6f15e3ad-bf04-4940-9b81-0f14fac8ebf2';
 
-
 const DataTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: (selectedRowKeys) => {
+      setSelectedRowKeys(selectedRowKeys)
+    },
+  };
 
   const columns = [
     {
@@ -95,6 +102,7 @@ const DataTable = () => {
         columns={columns}
         dataSource={data}
         loading={loading}
+        rowSelection={rowSelection}
         rowKey="RN"
       />
       { error && <div>{error}</div> }
