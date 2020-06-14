@@ -77,9 +77,7 @@ const DataTable = (props) => {
             columns={[...mergedColumns, operationsColumn]}
             dataSource={data}
             loading={loadingData}
-            pagination={{
-              onChange: () => setEditingKey(''),
-            }}
+            onChange={() => setEditingKey('')}
             rowSelection={rowSelection}
             rowKey="RN"
             scroll={{ x: 'max-content' }}
