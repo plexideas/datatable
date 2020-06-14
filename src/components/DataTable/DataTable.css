@@ -1,0 +1,29 @@
+.table-striped-rows .ant-table-tbody > tr.ant-table-row:nth-child(2n):hover > td {
+  background: #fbfbfb;
+}
+
+.table-striped-rows .ant-table-tbody > tr.ant-table-row:hover > td {
+  background: #d8eefd;
+}
+
+.table-striped-rows tr:nth-child(2n) td {
+  background-color: #fbfbfb;
+}
+
+.table-striped-rows tr td {
+  background-color: #d8eefd
+}
+
+thead[class*="ant-table-thead"] th{
+  background-color: #5aa9e6 !important;
+}
+
+.table-striped-rows td.ant-table-cell {
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.table-striped-rows thead > tr > th {
+  font-size: 12px;
+  padding: 2px 6px;
+}
