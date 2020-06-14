@@ -48,6 +48,20 @@ export const COLUMNS = [
     dataIndex: "VALUE_1",
     key:"VALUE_1",
     sorter: (a, b) => a.VALUE_1 - b.VALUE_1,
+    render: (value) => {
+      const obj = {
+        children: value,
+        props: {}
+      }
+
+      if (parseInt(value) > 2000 && parseInt(value) <= 3000) {
+        obj.props = { style: { background: "#ffe45e" } }
+      } else if (parseInt(value) > 3000) {
+        obj.props = { style: { background: "#f50049" }}
+      }
+
+      return obj;
+    }
   },
   {
     title: "Duplex Compensation Coefficient",
