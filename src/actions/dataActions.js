@@ -5,6 +5,7 @@ export const TEST_DATA_URL = 'https://run.mocky.io/v3/6f15e3ad-bf04-4940-9b81-0f
 export const ACTION_DATA_FETCH_STARTED = 'ACTION_DATA_FETCH_STARTED';
 export const ACTION_DATA_FETCH_SUCCESS = 'ACTION_DATA_FETCH_SUCCESS';
 export const ACTION_DATA_FETCH_ERROR = 'ACTION_DATA_FETCH_ERROR';
+export const ACTION_SET_DATA = 'ACTION_SET_DATA';
 
 export const actionFetchData = () => (
   (dispatch) => {
@@ -37,5 +38,12 @@ export const actionFetchDataError = (error) => {
   return {
     type: ACTION_DATA_FETCH_ERROR,
     payload: error,
+  }
+}
+
+export const actionSetData = (data) => {
+  return {
+    type: ACTION_SET_DATA,
+    payload: data,
   }
 }
