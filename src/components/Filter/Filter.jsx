@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, Modal, Input, InputNumber, Space } from 'antd';
+import { Button, Modal, Input, InputNumber, Space, Form } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 
 import SourceInput from '../SourceInput/SourceInput';
@@ -38,6 +38,15 @@ const Filter = (props) => {
     setVisible(false);
   };
 
+  const hadleClearFilter = () => {
+    setDescription('');
+    setClientName('');
+    setTerminationDate('');
+    setSource('');
+    setMaxRange('');
+    filterClear();
+  }
+
   const isFiltered = () => {
     const filterAsArr = Object.entries(filter);
     return filterAsArr.filter(el => el[1]).length > 0
@@ -53,30 +62,47 @@ const Filter = (props) => {
         onCancel={handleCancel}
         width={780}
       >
-        <Space className="filter">
-          <Input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)} 
-          />
-          <SourceInput
-            value={source}
-            onChange={setSource}
-            allowClear
-          />
-          <ClientNameInput
-            value={clientName}
-            onChange={setClientName}
-            allowClear
-          />
-          <TerminationDateInput value={terminationDate} onChange={setTerminationDate} />
-          <InputNumber
-            value={maxRange}
-            onChange={setMaxRange}
-            formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} 
-          />
-        </Space>
+        <Form 
+          layout='vertical'
+        >
+          <Space>
+            <Form.Item label="Description">
+              <Input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)} 
+              />
+            </Form.Item>
+            <Form.Item label="Source">
+              <SourceInput
+                value={source}
+                onChange={setSource}
+                allowClear
+              />
+            </Form.Item>
+            <Form.Item label="Client name">
+              <ClientNameInput
+                value={clientName}
+                onChange={setClientName}
+                allowClear
+              />
+            </Form.Item>
+            <Form.Item label="Termination date">
+              <TerminationDateInput value={terminationDate} onChange={setTerminationDate} />
+            </Form.Item>
+            <Form.Item label="Max range">
+              <InputNumber
+                value={maxRange}
+                onChange={setMaxRange}
+                formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} 
+              />
+            </Form.Item>
+            
+            
+            
+          </Space>
+        </Form>
       </Modal>
-      { isFiltered() && <Button onClick={filterClear}>Clear filter</Button> }
+      { isFiltered() && <Button onClick={hadleClearFilter}>Clear filter</Button> }
     </Space>
   )
 }
