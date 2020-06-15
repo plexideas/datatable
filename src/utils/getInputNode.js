@@ -8,7 +8,7 @@ import ClientNameInput from '../components/ClientNameInput/ClientNameInput';
 const getInputNode = (inputType, dataIndex) => {
   switch(dataIndex) {
     case COLUMN.VALUE_3:
-      return <InputNumber formatter={parseInt} />
+      return <InputNumber formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} />
     case COLUMN.TERMINATION_DT:
       return <TerminationDateInput />
     case COLUMN.SOURCE_NM: 
