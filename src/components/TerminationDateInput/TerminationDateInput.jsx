@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { DatePicker } from 'antd';
+import React from 'react';
 import moment from 'moment';
+import { DatePicker } from 'antd';
 
 const TerminationDateInput = (props) => {
-  const initDate = props.value 
-    ? moment(new Date(props.value)) 
-    : ''
-  const [date, setDate] = useState(initDate);
   const handleOnChange = (value) => {
     if (props.onChange) {
       props.onChange(value ? value.format('YYYY-MM') : '');
     }
-    setDate(value)
   }
 
   return (
     <DatePicker.MonthPicker 
-      value={date}
+      value={props.value ? moment(new Date(props.value)) : ''}
       onChange={handleOnChange}
     />
   )
