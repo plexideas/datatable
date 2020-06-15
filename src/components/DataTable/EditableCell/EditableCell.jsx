@@ -13,28 +13,24 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  let inputNode = getInputNode(inputType, dataIndex);
+  const inputNode = getInputNode(inputType, dataIndex);
+
+  const rules = [
+    {
+      required: true,
+      message: `Please Input ${title}!`,
+    },
+  ];
+
+  const editableNode = (
+    <Form.Item name={dataIndex} style={{ margin: 0 }} rules={rules} >
+      {inputNode}
+    </Form.Item>
+  )
 
   return (
     <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{
-            margin: 0,
-          }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
+      { editing ? editableNode : children }
     </td>
   );
 };
