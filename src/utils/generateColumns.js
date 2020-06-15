@@ -39,7 +39,6 @@ const generateColumns = (configs) => {
   const columns = configsArr.map((conf) => {
     const key = conf[0];
     const { label, type } = conf[1];
-    console.log({type});
     return {
       title: label,
       dataIndex: key,
