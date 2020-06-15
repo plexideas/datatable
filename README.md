@@ -1,6 +1,6 @@
-# Datatable
+# Datatable &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/ea4a7745-a8c8-4d19-9b28-23904f1485e1/deploy-status)](https://plexideas.dev)
 
-# Stack
+## Stack
 
 React, Redux, Antd and Axios as http client
 
@@ -17,3 +17,6 @@ $ npm install
 
 $ npm run start
 ```
+
+## Demo
+https://plexideas.dev
