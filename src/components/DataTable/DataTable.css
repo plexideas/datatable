@@ -11,7 +11,7 @@
 }
 
 .table-striped-rows tr td {
-  background-color: #d8eefd
+  background-color: #d8eefd;
 }
 
 thead[class*="ant-table-thead"] th{
