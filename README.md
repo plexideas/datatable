@@ -2,7 +2,7 @@
 
 ## Stack
 
-React, Redux, Antd and Axios as http client
+React, Redux, Antd and Axios as an http client
 
 ## Usage
 
