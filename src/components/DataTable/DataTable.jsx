@@ -65,17 +65,21 @@ const DataTable = (props) => {
     };
   });
 
-  const filteredData = data.filter((el) => (
-    el[COLUMN.DESCRIPTION].toLocaleLowerCase().includes(filter.description.toLocaleLowerCase())
-    &&
-    (!filter.source || el[COLUMN.SOURCE_NM] === filter.source)
-    &&
-    (!filter.clientName || el[COLUMN.CLIENT_NM] === filter.clientName)
-    &&
-    (!filter.terminationDate || el[COLUMN.TERMINATION_DT] === filter.terminationDate)
-    &&
-    (!filter.maxRange || el[COLUMN.VALUE_3] === filter.maxRange)
-  ));
+  const filteredData = data.filter((value) => {
+    const filterDerscription = value[COLUMN.DESCRIPTION]
+      .toLocaleLowerCase()
+      .includes(filter.description.toLocaleLowerCase());
+    const filterSource = (!filter.source || value[COLUMN.SOURCE_NM] === filter.source);
+    const filterClientName = (!filter.clientName || value[COLUMN.CLIENT_NM] === filter.clientName);
+    const filterTerminationDate = (!filter.terminationDate || value[COLUMN.TERMINATION_DT] === filter.terminationDate)
+    const filterMaxRange = (!filter.maxRange || value[COLUMN.VALUE_3] === filter.maxRange);
+    
+    return filterDerscription 
+      && filterSource 
+      && filterClientName 
+      && filterTerminationDate 
+      && filterMaxRange;
+  })
 
   return (
     <Form form={form} component={false}>
