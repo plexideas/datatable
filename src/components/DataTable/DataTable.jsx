@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { actionFetchData } from '../../actions/dataActions';
 import { actionFetchColumnsInfo } from '../../actions/columnsInfoActions';
 import { actionCommonSetEditingKey } from '../../actions/commonActions';
-
-import './DataTable.css';
 import OperationCell from './OperationCell/OperationCell';
 import EditableCell from './EditableCell/EditableCell';
+import Filter from '../Filter/Filter';
+
+import './DataTable.css';
+import { COLUMN } from '../../constants';
 
 const DataTable = (props) => {
 
@@ -20,7 +22,8 @@ const DataTable = (props) => {
     fetchData, 
     fetchColumnInfo,
     setEditingKey,
-    editingKey
+    editingKey,
+    filter
   } = props;
 
   const [form] = Form.useForm();
@@ -62,6 +65,18 @@ const DataTable = (props) => {
     };
   });
 
+  const filteredData = data.filter((el) => (
+    el[COLUMN.DESCRIPTION].toLocaleLowerCase().includes(filter.description.toLocaleLowerCase())
+    &&
+    (!filter.source || el[COLUMN.SOURCE_NM] === filter.source)
+    &&
+    (!filter.clientName || el[COLUMN.CLIENT_NM] === filter.clientName)
+    &&
+    (!filter.terminationDate || el[COLUMN.TERMINATION_DT] === filter.terminationDate)
+    &&
+    (!filter.maxRange || el[COLUMN.VALUE_3] === filter.maxRange)
+  ));
+
   return (
     <Form form={form} component={false}>
       {
@@ -75,12 +90,12 @@ const DataTable = (props) => {
               },
             }}
             columns={[...mergedColumns, operationsColumn]}
-            dataSource={data}
+            dataSource={filteredData}
             loading={loadingData}
             onChange={() => setEditingKey('')}
             rowSelection={rowSelection}
             rowKey="RN"
-            scroll={{ x: 'max-content' }}
+            footer={() => <Filter />}
           />
       }
       { error && <div>{error}</div> }
@@ -96,6 +111,7 @@ const mapStateToProps = (state) => {
     columns: state.columnsInfo.columns,
     loadingColumns: state.columnsInfo.loading,
     editingKey: state.common.editingKey,
+    filter: state.filter
   };
 };
 
