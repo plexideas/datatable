@@ -7,7 +7,7 @@ const SourceInput = (props) => {
   ];
 
   return (
-    <Select { ...props }>
+    <Select { ...props } style={{minWidth: '75px'}}>
       {
         options.map(opt => (
           <Select.Option key={opt} value={opt}>{opt}</Select.Option>
