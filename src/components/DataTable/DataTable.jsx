@@ -96,6 +96,8 @@ const DataTable = (props) => {
             rowSelection={rowSelection}
             rowKey="RN"
             footer={() => <Filter />}
+            title={() => 'Datatable'}
+            scroll={{x: 'max-content'}}
           />
       }
       { error && <div>{error}</div> }

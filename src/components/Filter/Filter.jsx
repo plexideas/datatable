@@ -34,7 +34,6 @@ const Filter = (props) => {
   };
 
   const handleCancel = e => {
-    console.log(e);
     setVisible(false);
   };
 
@@ -61,12 +60,20 @@ const Filter = (props) => {
         onOk={handleOk}
         onCancel={handleCancel}
         width={780}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Submit
+          </Button>,
+        ]}
       >
         <Form 
           layout='vertical'
         >
           <Space>
-            <Form.Item label="Description">
+            <Form.Item label="Item Description">
               <Input
                 value={description}
                 onChange={(e) => setDescription(e.target.value)} 
@@ -95,10 +102,7 @@ const Filter = (props) => {
                 onChange={setMaxRange}
                 formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} 
               />
-            </Form.Item>
-            
-            
-            
+            </Form.Item>    
           </Space>
         </Form>
       </Modal>
