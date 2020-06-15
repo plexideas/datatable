@@ -9,9 +9,7 @@ const OperationCell = (props) => {
   const editable = record.RN === editingKey;
 
   const edit = (record) => {
-    form.setFieldsValue({
-      ...record,
-    });
+    form.setFieldsValue({ ...record });
     setEditingKey(record.RN);
   };
 
@@ -24,30 +22,30 @@ const OperationCell = (props) => {
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, { ...item, ...row });
-        setData(newData);
-        setEditingKey('');
       } else {
         newData.push(row);
-        setData(newData);
-        setEditingKey('');
       }
+
+      setData(newData);
+      setEditingKey('');
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
     }
   };
 
-  return editable ? (
-    <Button
-      type="link"
-      onClick={() => save(record.RN)}
-    >
-      Save
-    </Button>
-  ) : (
+  const editButton = (
     <Button type="link" disabled={editingKey !== ''} onClick={() => edit(record)}>
       Edit
     </Button>
-  );
+  )
+
+  const saveButton = (
+    <Button type="link" onClick={() => save(record.RN)}>
+      Save
+    </Button>
+  )
+
+  return editable ? saveButton : editButton
 }
 
 const mapStateToProps = (state) => {
