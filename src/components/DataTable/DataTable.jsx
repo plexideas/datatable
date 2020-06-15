@@ -9,7 +9,6 @@ import EditableCell from './EditableCell/EditableCell';
 import Filter from '../Filter/Filter';
 
 import './DataTable.css';
-import { COLUMN } from '../../constants';
 
 const DataTable = (props) => {
 
@@ -66,13 +65,13 @@ const DataTable = (props) => {
   });
 
   const filteredData = data.filter((value) => {
-    const filterDerscription = value[COLUMN.DESCRIPTION]
+    const filterDerscription = value.DESCRIPTION
       .toLocaleLowerCase()
       .includes(filter.description.toLocaleLowerCase());
-    const filterSource = (!filter.source || value[COLUMN.SOURCE_NM] === filter.source);
-    const filterClientName = (!filter.clientName || value[COLUMN.CLIENT_NM] === filter.clientName);
-    const filterTerminationDate = (!filter.terminationDate || value[COLUMN.TERMINATION_DT] === filter.terminationDate)
-    const filterMaxRange = (!filter.maxRange || value[COLUMN.VALUE_3] === filter.maxRange);
+    const filterSource = (!filter.source || value.SOURCE_NM === filter.source);
+    const filterClientName = (!filter.clientName || value.CLIENT_NM === filter.clientName);
+    const filterTerminationDate = (!filter.terminationDate || value.TERMINATION_DT === filter.terminationDate)
+    const filterMaxRange = (!filter.maxRange || value.VALUE_3 === filter.maxRange);
     
     return filterDerscription 
       && filterSource 
