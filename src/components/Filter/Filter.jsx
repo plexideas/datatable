@@ -6,10 +6,10 @@ import { FilterOutlined } from '@ant-design/icons';
 import SourceInput from '../SourceInput/SourceInput';
 import ClientNameInput from '../ClientNameInput/ClientNameInput';
 import TerminationDateInput from '../TerminationDateInput/TerminationDateInput';
-import { actionFilterSetCriteria } from '../../actions/filterReducer';
+import { actionFilterSetCriteria, actionFilterClear } from '../../actions/filterReducer';
 
 const Filter = (props) => {
-  const { filterSetCriteria, filter } = props;
+  const { filterSetCriteria, filterClear, filter } = props;
 
   const [visible, setVisible] = useState(false);
   const [description, setDescription] = useState(filter.description);
@@ -38,8 +38,13 @@ const Filter = (props) => {
     setVisible(false);
   };
 
+  const isFiltered = () => {
+    const filterAsArr = Object.entries(filter);
+    return filterAsArr.filter(el => el[1]).length > 0
+  }
+
   return (
-    <>
+    <Space>
       <Button type="primary" icon={<FilterOutlined />} onClick={showModal}>Filter</Button>
       <Modal
         title="Filter"
@@ -71,7 +76,8 @@ const Filter = (props) => {
           />
         </Space>
       </Modal>
-    </>
+      { isFiltered() && <Button onClick={filterClear}>Clear filter</Button> }
+    </Space>
   )
 }
 
@@ -85,6 +91,9 @@ const mapDispatchToProps = dispatch => {
   return {
     filterSetCriteria: (data) => {
       dispatch(actionFilterSetCriteria(data));
+    },
+    filterClear: () => {
+      dispatch(actionFilterClear());
     },
   };
 };
