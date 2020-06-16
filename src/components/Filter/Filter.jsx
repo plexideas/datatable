@@ -7,9 +7,10 @@ import SourceInput from '../SourceInput/SourceInput';
 import ClientNameInput from '../ClientNameInput/ClientNameInput';
 import TerminationDateInput from '../TerminationDateInput/TerminationDateInput';
 import { actionFilterSetCriteria, actionFilterClear } from '../../actions/filterReducer';
+import { actionCommonSetEditingKey } from '../../actions/commonActions';
 
 const Filter = (props) => {
-  const { filterSetCriteria, filterClear, filter } = props;
+  const { filterSetCriteria, filterClear, filter, setEditingKey } = props;
 
   const [visible, setVisible] = useState(false);
   const [description, setDescription] = useState(filter.description);
@@ -19,6 +20,7 @@ const Filter = (props) => {
   const [maxRange, setMaxRange] = useState(filter.maxRange);
 
   const showModal = () => {
+    setEditingKey('');
     setVisible(true);
   };
 
@@ -124,6 +126,9 @@ const mapDispatchToProps = dispatch => {
     },
     filterClear: () => {
       dispatch(actionFilterClear());
+    },
+    setEditingKey: (editingKey) => {
+      dispatch(actionCommonSetEditingKey(editingKey));
     },
   };
 };

@@ -1,14 +1,15 @@
 import React from 'react';
 import { InputNumber, Input, DatePicker } from 'antd';
-import { TYPE, COLUMN } from '../constants';
 import TerminationDateInput from '../components/TerminationDateInput/TerminationDateInput';
 import SourceInput from '../components/SourceInput/SourceInput';
 import ClientNameInput from '../components/ClientNameInput/ClientNameInput';
+import { TYPE, COLUMN } from '../constants';
+import { integerFormatter } from './formatter';
 
 const getInputNode = (inputType, dataIndex) => {
   switch(dataIndex) {
     case COLUMN.VALUE_3:
-      return <InputNumber formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} />
+      return <InputNumber formatter={integerFormatter} />
     case COLUMN.TERMINATION_DT:
       return <TerminationDateInput />
     case COLUMN.SOURCE_NM: 
@@ -30,5 +31,7 @@ const getStandartInputNode = (inputType) => {
     default: return <Input />
   }
 }
+
+
 
 export default getInputNode;
