@@ -8,6 +8,7 @@ import ClientNameInput from '../ClientNameInput/ClientNameInput';
 import TerminationDateInput from '../TerminationDateInput/TerminationDateInput';
 import { actionFilterSetCriteria, actionFilterClear } from '../../actions/filterReducer';
 import { actionCommonSetEditingKey } from '../../actions/commonActions';
+import { integerFormatter } from '../../utils/formatter';
 
 const Filter = (props) => {
   const { filterSetCriteria, filterClear, filter, setEditingKey } = props;
@@ -102,7 +103,7 @@ const Filter = (props) => {
               <InputNumber
                 value={maxRange}
                 onChange={setMaxRange}
-                formatter={(val) => isNaN(parseInt(val)) ? '' : parseInt(val)} 
+                formatter={integerFormatter} 
               />
             </Form.Item>    
           </Space>
