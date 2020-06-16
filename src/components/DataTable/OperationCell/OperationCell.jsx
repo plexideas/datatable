@@ -34,13 +34,22 @@ const OperationCell = (props) => {
   };
 
   const editButton = (
-    <Button type="link" disabled={editingKey !== ''} onClick={() => edit(record)}>
+    <Button 
+      type="link" 
+      style={{paddingLeft: 0}} 
+      disabled={editingKey !== ''} 
+      onClick={() => edit(record)}
+    >
       Edit
     </Button>
   )
 
   const saveButton = (
-    <Button type="link" onClick={() => save(record.RN)}>
+    <Button 
+      type="link"
+      style={{paddingLeft: 0}} 
+      onClick={() => save(record.RN)}
+    >
       Save
     </Button>
   )
