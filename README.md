@@ -1,4 +1,4 @@
-# Datatable &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/ea4a7745-a8c8-4d19-9b28-23904f1485e1/deploy-status)](https://eager-colden-91b0d5.netlify.app)
+# Datatable &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/ea4a7745-a8c8-4d19-9b28-23904f1485e1/deploy-status)](https://app.netlify.com/sites/eager-colden-91b0d5/deploys)
 
 ## Stack
 
